@@ -14,6 +14,24 @@ from rest_framework.serializers import (
 
 User = get_user_model()
 
+class UserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = '__all__'
+# class UserSerializer(ModelSerializer):
+#     class Meta:
+#         model = User
+#         fields = '__all__'
+        #     [
+        #     'username',
+        #     'email',
+        #     'email2',
+        #     'password',
+        #
+        # ]
+
+
 class UserCreateSerializer(ModelSerializer):
     email = EmailField(label='Email')
     email2 = EmailField(label='Confirm Email')
@@ -114,3 +132,9 @@ class UserLoginSerializer(ModelSerializer):
 
         data["token"] = "SOME RANDOM TOKEN"
         return data
+
+
+# class UserInvitationSerializer(ModelSerializer):
+#     class Meta:
+#         model = Invitation
+#         fields = ('to_email', 'message', 'expiry_date')

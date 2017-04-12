@@ -18,5 +18,5 @@ from django.contrib import admin
 from accounts.views import (login_view, register_view, logout_view)
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^api/users/', include("accounts.api.urls", namespace='users-api'))
+    url(r'^api/', include("accounts.api.urls", namespace='users-api'))
 ]
