@@ -32,6 +32,12 @@ def register_view(request):
             return redirect(next)
         return redirect("/")
 
+    context = {
+        "form":form,
+        "title":title
+    }
+    return render(request, "form.html", context)
+
 def logout_view(request):
     logout(request)
     return redirect("/")

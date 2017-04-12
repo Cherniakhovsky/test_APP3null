@@ -1,3 +1,16 @@
+from django.db.models import Q
+from django.contrib.auth import get_user_model
+
+from rest_framework.response import Response
+from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
+from rest_framework.views import APIView
+
+from rest_framework.filters import (
+        SearchFilter,
+        OrderingFilter,
+    )
+
+from rest_framework.mixins import DestroyModelMixin, UpdateModelMixin
 from rest_framework.generics import (
     CreateAPIView,
     DestroyAPIView,
@@ -12,12 +25,16 @@ from rest_framework.permissions import (
     IsAuthenticatedOrReadOnly,
     )
 from rest_framework.views import APIView
-from django.contrib.auth.models import User
+
+#from django.contrib.auth.models import User
 #from posts.api.permissions import IsOwnerOrReadOnly
 #from posts.api.pagination import PostLimitOffsetPagination, PostPageNumberPagination
 
+User = get_user_model()
+
 from .serializers import (
-    UserCreateSerializer
+    UserCreateSerializer,
+    UserLoginSerializer,
     )
 
 class UserCreateAPIView(CreateAPIView):
@@ -27,6 +44,7 @@ class UserCreateAPIView(CreateAPIView):
 
 class UserLoginAPIView(APIView):
     permission_classes = [AllowAny]
+    serializer_class = UserLoginSerializer
 
     def post(self, request, *args, **kwargs):
         data = request.data
